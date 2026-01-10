@@ -110,7 +110,7 @@ class Funcionalidades():
                     try:
                         datetime.strptime(fecha1, "%Y-%m-%d")
                         if actualizar==0:
-                            mb.showinfo('Libro: ', f'El libro {nombre1} del autor {autor1} ha sido añaࡤido correctamente.')
+                            mb.showinfo('Libro: ', f'El libro {nombre1} del autor {autor1} ha sido añadido correctamente.')
                             bd.añadir_item(nombre1,autor1,categoria1,fecha1)
                             posicion+=1
                             Funcionalidades.fichero(df,posicion,nombre1,autor1,categoria1,fecha1)
