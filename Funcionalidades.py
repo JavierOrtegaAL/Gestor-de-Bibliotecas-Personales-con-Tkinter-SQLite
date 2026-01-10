@@ -106,26 +106,27 @@ class Funcionalidades():
                 else:
                     mb.showinfo("Buscar", "No se encontraron resultados")
             else:
-                try:
-                    if (nombre1!="") & (autor1!="") & (categoria1!="") & (fecha1!=""):
-                        try:
-                            datetime.strptime(fecha1, "%Y-%m-%d")
-                            if actualizar==0:
-                                mb.showinfo('Libro: ', f'El libro {nombre1} del autor {autor1} ha sido añadido correctamente.')
-                                bd.añadir_item(nombre1,autor1,categoria1,fecha1)
-                                posicion+=1
-                                Funcionalidades.fichero(df,posicion,nombre1,autor1,categoria1,fecha1)
-                            elif actualizar==1:
-                                mb.showinfo('Libro: ', f'El libro {nombre1} del autor {autor1} ha sido actualizado correctamente.')
-                                bd.modificar_item(id,nombre1,autor1,categoria1,fecha1)
-                                id=int(id)
-                                Funcionalidades.fichero(df,id,nombre1,autor1,categoria1,fecha1)
-                                Funcionalidades.editar_items(parent=Funcionalidades.ventana_editar.master, subventana=Funcionalidades.ventana_editar)
-                                subventana.destroy()
-                        except ValueError:
-                            mb.showerror("Error", "Formato de fecha inválido. Usa YYYY-MM-DD.")
-                except Exception:
-                            mb.showerror("Error", "Campos incompletos.")
+                if not (nombre1 and autor1 and categoria1 and fecha1):
+                    mb.showerror("Error", "Campos incompletos.")
+                    return
+                if (nombre1!="") & (autor1!="") & (categoria1!="") & (fecha1!=""):
+                    try:
+                        datetime.strptime(fecha1, "%Y-%m-%d")
+                        if actualizar==0:
+                            mb.showinfo('Libro: ', f'El libro {nombre1} del autor {autor1} ha sido añadido correctamente.')
+                            bd.añadir_item(nombre1,autor1,categoria1,fecha1)
+                            posicion+=1
+                            Funcionalidades.fichero(df,posicion,nombre1,autor1,categoria1,fecha1)
+                        elif actualizar==1:
+                            mb.showinfo('Libro: ', f'El libro {nombre1} del autor {autor1} ha sido actualizado correctamente.')
+                            bd.modificar_item(id,nombre1,autor1,categoria1,fecha1)
+                            id=int(id)
+                            Funcionalidades.fichero(df,id,nombre1,autor1,categoria1,fecha1)
+                            Funcionalidades.editar_items(parent=Funcionalidades.ventana_editar.master, subventana=Funcionalidades.ventana_editar)
+                            subventana.destroy()
+                    except ValueError:
+                        mb.showerror("Error", "Formato de fecha inválido. Usa YYYY-MM-DD.")
+                
         except Exception as e:
             mb.showwarning(title='Error al crear al enviar los datos',message=e)    
 
