@@ -1,14 +1,17 @@
 from datetime import datetime
+import sqlite3
 from tkinter import *
 import tkinter as tk
 import baseDeDatos as bd
 from tkinter import messagebox as mb
 from tkinter import ttk
-import csv
 import pandas as pd
 
 class Funcionalidades():
     
+    def __init__(self):
+        self.conexion = sqlite3.connect("libreria.db")
+
     ventana_editar = None
 
     def crear_subventana(parent):
